@@ -6,8 +6,13 @@ CONFIGFOLDER='/root/.epgc'
 COIN_DAEMON='epgcd'
 COIN_CLI='epgc-cli'
 COIN_PATH='/usr/local/bin/'
-COIN_TGZ='https://github.com/cryptobot12/script/releases/download/v1.0.4/epgc_ubuntu_18.04_binaries.zip'
-COIN_ZIP=$(echo $COIN_TGZ | awk -F'/' '{print $NF}')
+OS_VERSION=$(lsb_release -d)
+if [[ $(lsb_release -d) == *16.04* ]]; then
+	COIN_TGZP='http://104.248.2.49/epgc_ubuntu_16.04_binaries.tar.bz2'
+elif [[ $(lsb_release -d) == *18.04* ]]; then
+	COIN_TGZP='https://github.com/cryptobot12/script/releases/download/v1.0.4/epgc_ubuntu_18.04_binaries.zip'
+fi
+COIN_ZIP=$(echo $COIN_TGZP | awk -F'/' '{print $NF}')
 COIN_NAME='encocoinplus'
 PROJECT_NAME='Encocoinplus EPG - Encocoin Payment Guarantee'
 COIN_EXPLORER='http://explorer.encocoin.net'
